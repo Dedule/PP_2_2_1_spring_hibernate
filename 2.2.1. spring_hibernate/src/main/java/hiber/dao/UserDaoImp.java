@@ -1,5 +1,6 @@
 package hiber.dao;
 
+import hiber.model.Car;
 import hiber.model.User;
 import jakarta.persistence.TypedQuery;
 import org.hibernate.SessionFactory;
@@ -25,5 +26,13 @@ public class UserDaoImp implements UserDao {
       TypedQuery<User> query=sessionFactory.getCurrentSession().createQuery("from User");
       return query.getResultList();
    }
+
+   public User getUserByCarModelAndId(String mod, int ser) {
+      String HQL="FROM Car car WHERE car.model=:carMod AND car.series=:carSer";
+      Car car = sessionFactory.getCurrentSession().createQuery(HQL, Car.class).setParameter("carMod", mod)
+              .setParameter("carSer", ser).uniqueResult();
+      return car.getUser();
+   }
+
 
 }

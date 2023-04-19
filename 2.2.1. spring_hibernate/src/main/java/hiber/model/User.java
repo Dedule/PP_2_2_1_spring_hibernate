@@ -5,7 +5,11 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
 @Entity
 @Table(name = "users")
@@ -23,6 +27,30 @@ public class User {
 
    @Column(name = "email")
    private String email;
+
+   @OneToOne(mappedBy = "user")
+   @Cascade(CascadeType.ALL)
+   @JoinColumn(name = "car_id", referencedColumnName = "user_id")
+   private Car car;
+   public Car getCar() {
+      return car;
+   }
+
+   public void setCar(Car car) {
+      this.car = car;
+   }
+
+   public User(String firstName, String lastName, String email, Car car) {
+      this.firstName = firstName;
+      this.lastName = lastName;
+      this.email = email;
+      this.car = car;
+   }
+
+   @Override
+   public String toString() {
+      return "!!!!!!!!!!!!!!!!!!" + firstName;
+   }
 
    public User() {}
    
