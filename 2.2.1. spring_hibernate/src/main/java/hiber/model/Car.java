@@ -46,7 +46,7 @@ public class Car implements Serializable{
         this.user = user;
     }
 
-    public String getName() {
+    public String getModel() {
         return model;
     }
 

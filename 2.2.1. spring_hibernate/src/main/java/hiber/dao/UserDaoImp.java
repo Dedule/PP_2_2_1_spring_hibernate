@@ -28,11 +28,10 @@ public class UserDaoImp implements UserDao {
    }
 
    public User getUserByCarModelAndId(String mod, int ser) {
-      String HQL="FROM Car car WHERE car.model=:carMod AND car.series=:carSer";
-      Car car = sessionFactory.getCurrentSession().createQuery(HQL, Car.class).setParameter("carMod", mod)
+      String HQL="FROM User u WHERE u.car.model=:carMod AND u.car.series=:carSer";
+      return sessionFactory.getCurrentSession().createQuery(HQL, User.class).setParameter("carMod", mod)
               .setParameter("carSer", ser).uniqueResult();
-      return car.getUser();
-   }
 
+   }
 
 }
